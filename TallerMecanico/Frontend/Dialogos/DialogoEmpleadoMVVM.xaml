@@ -1,0 +1,89 @@
+﻿<mah:MetroWindow x:Class="TallerMecanico.Frontend.Dialogos.DialogoEmpleadoMVVM"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:TallerMecanico.Frontend.Dialogos"
+        ResizeMode="NoResize" ShowCloseButton="False"
+        mc:Ignorable="d" Height="300" Width="600" Title="EDICIÓN EMPLEADO">
+    <Grid Background="#333333">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Margin="0,10,5,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Nombre" Margin="10,5,5,0" Width="50"/>
+            <TextBox x:Name="TxtNombre" BorderBrush="Gray" BorderThickness="1" Grid.Column="1"
+                     Text="{Binding nuevoEmpleado.nombre, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+
+        <Grid Grid.Row="0" Margin="5,10,5,0" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Apellidos" Margin="0,5,5,0" Width="60"/>
+            <TextBox x:Name="TxtApellidos" BorderBrush="Gray" BorderThickness="1" Grid.Column="1"
+                     Text="{Binding nuevoEmpleado.apellidos, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0,30,5,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Usuario" Margin="10,5,5,0"  Width="50"/>
+            <TextBox x:Name="TxtUsuario" BorderBrush="Gray" BorderThickness="1" Grid.Column="1"
+                     Text="{Binding nuevoEmpleado.usuLogin, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1" Margin="5,30,5,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Contraseña" Margin="0,5,5,0" Width="60"/>
+            <TextBox x:Name="TxtConstrasenya" BorderBrush="Gray" BorderThickness="1" Grid.Column="1"
+                     Text="{Binding nuevoEmpleado.contrasenya, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="0,30,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Rol" Margin="10,5,5,0" Width="50"/>
+            <ComboBox Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Width="120" x:Name="CBRol"
+                      SelectedItem="{Binding nuevoEmpleado.rol, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                      ItemsSource="{Binding listaRoles}" DisplayMemberPath="nombreRol" SelectedValuePath="idRol" Style="{StaticResource MahApps.Styles.ComboBox}"/>
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="1" Margin="0,10,5,0" HorizontalAlignment="Right">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="BtnGuardar" Content="GUARDAR" Margin="0,0,10,0" Click="BtnGuardar_Click"/>
+            <Button Grid.Column="1" x:Name="BtnCancelar" Content="CANCELAR" Click="BtnCancelar_Click"/>
+        </Grid> 
+    </Grid>
+</mah:MetroWindow>

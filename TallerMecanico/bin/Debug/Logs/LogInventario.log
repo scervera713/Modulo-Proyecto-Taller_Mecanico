@@ -1,0 +1,72 @@
+2023-06-07 20:59:51.1951|ERROR|TallerMecanico.MVVM.Base.MVBaseCRUD`1|
+Insertando un nuevo objeto ...System.Data.Entity.DynamicProxies.reparacion_F90A1B1BCA727D703407A2C78EF9309C46D332F48C53AD12FC241158DFBB891A
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en TallerMecanico.Backend.Servicios.ServicioGenerico`1.save() en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\Backend\Servicios\Base\ServicioGenerico.cs:línea 60
+   en TallerMecanico.MVVM.Base.MVBaseCRUD`1.delete(T entity) en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\MVVM\Base\MVBaseCRUD.cs:línea 70
+2023-06-07 21:00:25.1081|ERROR|TallerMecanico.MVVM.Base.MVBaseCRUD`1|
+Insertando un nuevo objeto ...System.Data.Entity.DynamicProxies.reparacion_F90A1B1BCA727D703407A2C78EF9309C46D332F48C53AD12FC241158DFBB891A
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en TallerMecanico.Backend.Servicios.ServicioGenerico`1.save() en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\Backend\Servicios\Base\ServicioGenerico.cs:línea 60
+   en TallerMecanico.MVVM.Base.MVBaseCRUD`1.delete(T entity) en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\MVVM\Base\MVBaseCRUD.cs:línea 70
+2023-06-07 21:01:33.5288|ERROR|TallerMecanico.MVVM.Base.MVBaseCRUD`1|
+Insertando un nuevo objeto ...System.Data.Entity.DynamicProxies.reparacion_F90A1B1BCA727D703407A2C78EF9309C46D332F48C53AD12FC241158DFBB891A
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en TallerMecanico.Backend.Servicios.ServicioGenerico`1.save() en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\Backend\Servicios\Base\ServicioGenerico.cs:línea 60
+   en TallerMecanico.MVVM.Base.MVBaseCRUD`1.delete(T entity) en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\MVVM\Base\MVBaseCRUD.cs:línea 70
+2023-06-07 21:02:04.0892|ERROR|TallerMecanico.MVVM.Base.MVBaseCRUD`1|
+Insertando un nuevo objeto ...System.Data.Entity.DynamicProxies.factura_2DE277A914BA60FEDD6EF71869808B09497F072B457414795139D8D3F6B1BD66
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en TallerMecanico.Backend.Servicios.ServicioGenerico`1.save() en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\Backend\Servicios\Base\ServicioGenerico.cs:línea 60
+   en TallerMecanico.MVVM.Base.MVBaseCRUD`1.delete(T entity) en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\MVVM\Base\MVBaseCRUD.cs:línea 70
+2023-06-07 21:02:50.3914|ERROR|TallerMecanico.MVVM.Base.MVBaseCRUD`1|
+Insertando un nuevo objeto ...System.Data.Entity.DynamicProxies.reparacion_F90A1B1BCA727D703407A2C78EF9309C46D332F48C53AD12FC241158DFBB891A
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en TallerMecanico.Backend.Servicios.ServicioGenerico`1.save() en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\Backend\Servicios\Base\ServicioGenerico.cs:línea 60
+   en TallerMecanico.MVVM.Base.MVBaseCRUD`1.delete(T entity) en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\MVVM\Base\MVBaseCRUD.cs:línea 70
+2023-06-07 21:11:24.3195|ERROR|TallerMecanico.MVVM.Base.MVBaseCRUD`1|
+Insertando un nuevo objeto ...System.Data.Entity.DynamicProxies.reparacion_F90A1B1BCA727D703407A2C78EF9309C46D332F48C53AD12FC241158DFBB891A
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en TallerMecanico.Backend.Servicios.ServicioGenerico`1.save() en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\Backend\Servicios\Base\ServicioGenerico.cs:línea 60
+   en TallerMecanico.MVVM.Base.MVBaseCRUD`1.delete(T entity) en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\MVVM\Base\MVBaseCRUD.cs:línea 70
+2023-06-07 21:12:28.6795|ERROR|TallerMecanico.MVVM.Base.MVBaseCRUD`1|
+Insertando un nuevo objeto ...System.Data.Entity.DynamicProxies.reparacion_F90A1B1BCA727D703407A2C78EF9309C46D332F48C53AD12FC241158DFBB891A
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en TallerMecanico.Backend.Servicios.ServicioGenerico`1.save() en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\Backend\Servicios\Base\ServicioGenerico.cs:línea 60
+   en TallerMecanico.MVVM.Base.MVBaseCRUD`1.delete(T entity) en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\MVVM\Base\MVBaseCRUD.cs:línea 70
+2023-06-07 21:13:04.6641|ERROR|TallerMecanico.MVVM.Base.MVBaseCRUD`1|
+Insertando un nuevo objeto ...System.Data.Entity.DynamicProxies.reparacion_F90A1B1BCA727D703407A2C78EF9309C46D332F48C53AD12FC241158DFBB891A
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en TallerMecanico.Backend.Servicios.ServicioGenerico`1.save() en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\Backend\Servicios\Base\ServicioGenerico.cs:línea 60
+   en TallerMecanico.MVVM.Base.MVBaseCRUD`1.delete(T entity) en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\MVVM\Base\MVBaseCRUD.cs:línea 70
+2023-06-08 16:23:17.4300|ERROR|TallerMecanico.MVVM.Base.MVBaseCRUD`1|
+Insertando un nuevo objeto ...System.Data.Entity.DynamicProxies.reparacion_F90A1B1BCA727D703407A2C78EF9309C46D332F48C53AD12FC241158DFBB891A
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en TallerMecanico.Backend.Servicios.ServicioGenerico`1.save() en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\Backend\Servicios\Base\ServicioGenerico.cs:línea 60
+   en TallerMecanico.MVVM.Base.MVBaseCRUD`1.delete(T entity) en C:\Users\Salva\source\repos\TallerMecanico\TallerMecanico\MVVM\Base\MVBaseCRUD.cs:línea 70

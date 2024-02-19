@@ -1,0 +1,585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="mydbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="apellidos" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="200" />
+          <Property Name="telefono" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="dni" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="poblacion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="empleado">
+          <Key>
+            <PropertyRef Name="idEmpleado" />
+          </Key>
+          <Property Name="idEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="apellidos" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="usuLogin" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="contrasenya" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rol_idRol" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="factura">
+          <Key>
+            <PropertyRef Name="idFactura" />
+          </Key>
+          <Property Name="idFactura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fechaEmision" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Cliente_idCliente" Type="int" Nullable="false" />
+          <Property Name="Reparacion_idReparacion" Type="int" Nullable="false" />
+          <Property Name="importeTotal" Type="double" Nullable="false" />
+          <Property Name="concepto" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="permiso">
+          <Key>
+            <PropertyRef Name="idPermiso" />
+          </Key>
+          <Property Name="idPermiso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pieza">
+          <Key>
+            <PropertyRef Name="idPieza" />
+          </Key>
+          <Property Name="idPieza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="precio" Type="double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reparacion">
+          <Key>
+            <PropertyRef Name="idReparacion" />
+          </Key>
+          <Property Name="idReparacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="80" />
+          <Property Name="precio" Type="double" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="resolucion" Type="varchar" MaxLength="200" />
+          <Property Name="fechaRecepcion" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="fechaResolucion" Type="datetime" Precision="0" />
+          <Property Name="observaciones" Type="varchar" MaxLength="200" />
+          <Property Name="Cliente_idCliente" Type="int" Nullable="false" />
+          <Property Name="Empleado_idEmpleado" Type="int" Nullable="false" />
+          <Property Name="horasTrabajadas" Type="double" />
+        </EntityType>
+        <EntityType Name="reparacion_has_pieza">
+          <Key>
+            <PropertyRef Name="Reparacion_idReparacion" />
+            <PropertyRef Name="Pieza_idPieza" />
+          </Key>
+          <Property Name="Reparacion_idReparacion" Type="int" Nullable="false" />
+          <Property Name="Pieza_idPieza" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreRol" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="rol_has_permiso">
+          <Key>
+            <PropertyRef Name="Rol_idRol" />
+            <PropertyRef Name="Permiso_idPermiso" />
+          </Key>
+          <Property Name="Rol_idRol" Type="int" Nullable="false" />
+          <Property Name="Permiso_idPermiso" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Empleado_Rol1">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="empleado">
+              <PropertyRef Name="Rol_idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_factura_Cliente1">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="factura" Type="Self.factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="factura">
+              <PropertyRef Name="Cliente_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_factura_Reparacion1">
+          <End Role="reparacion" Type="Self.reparacion" Multiplicity="1" />
+          <End Role="factura" Type="Self.factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reparacion">
+              <PropertyRef Name="idReparacion" />
+            </Principal>
+            <Dependent Role="factura">
+              <PropertyRef Name="Reparacion_idReparacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Reparacion_Cliente1">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="reparacion" Type="Self.reparacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="reparacion">
+              <PropertyRef Name="Cliente_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Reparacion_Empleado1">
+          <End Role="empleado" Type="Self.empleado" Multiplicity="1" />
+          <End Role="reparacion" Type="Self.reparacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleado">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="reparacion">
+              <PropertyRef Name="Empleado_idEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Reparacion_has_Pieza_Pieza1">
+          <End Role="pieza" Type="Self.pieza" Multiplicity="1" />
+          <End Role="reparacion_has_pieza" Type="Self.reparacion_has_pieza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pieza">
+              <PropertyRef Name="idPieza" />
+            </Principal>
+            <Dependent Role="reparacion_has_pieza">
+              <PropertyRef Name="Pieza_idPieza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Reparacion_has_Pieza_Reparacion">
+          <End Role="reparacion" Type="Self.reparacion" Multiplicity="1" />
+          <End Role="reparacion_has_pieza" Type="Self.reparacion_has_pieza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reparacion">
+              <PropertyRef Name="idReparacion" />
+            </Principal>
+            <Dependent Role="reparacion_has_pieza">
+              <PropertyRef Name="Reparacion_idReparacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Rol_has_Permiso_Permiso1">
+          <End Role="permiso" Type="Self.permiso" Multiplicity="1" />
+          <End Role="rol_has_permiso" Type="Self.rol_has_permiso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="permiso">
+              <PropertyRef Name="idPermiso" />
+            </Principal>
+            <Dependent Role="rol_has_permiso">
+              <PropertyRef Name="Permiso_idPermiso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Rol_has_Permiso_Rol1">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="rol_has_permiso" Type="Self.rol_has_permiso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="rol_has_permiso">
+              <PropertyRef Name="Rol_idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="mydbModelStoreContainer">
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="empleado" EntityType="Self.empleado" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="factura" EntityType="Self.factura" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="permiso" EntityType="Self.permiso" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="pieza" EntityType="Self.pieza" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="reparacion" EntityType="Self.reparacion" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="reparacion_has_pieza" EntityType="Self.reparacion_has_pieza" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="rol" EntityType="Self.rol" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="rol_has_permiso" EntityType="Self.rol_has_permiso" Schema="mydb" store:Type="Tables" />
+          <AssociationSet Name="fk_Empleado_Rol1" Association="Self.fk_Empleado_Rol1">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="empleado" EntitySet="empleado" />
+          </AssociationSet>
+          <AssociationSet Name="fk_factura_Cliente1" Association="Self.fk_factura_Cliente1">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="factura" EntitySet="factura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_factura_Reparacion1" Association="Self.fk_factura_Reparacion1">
+            <End Role="reparacion" EntitySet="reparacion" />
+            <End Role="factura" EntitySet="factura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Reparacion_Cliente1" Association="Self.fk_Reparacion_Cliente1">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="reparacion" EntitySet="reparacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Reparacion_Empleado1" Association="Self.fk_Reparacion_Empleado1">
+            <End Role="empleado" EntitySet="empleado" />
+            <End Role="reparacion" EntitySet="reparacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Reparacion_has_Pieza_Pieza1" Association="Self.fk_Reparacion_has_Pieza_Pieza1">
+            <End Role="pieza" EntitySet="pieza" />
+            <End Role="reparacion_has_pieza" EntitySet="reparacion_has_pieza" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Reparacion_has_Pieza_Reparacion" Association="Self.fk_Reparacion_has_Pieza_Reparacion">
+            <End Role="reparacion" EntitySet="reparacion" />
+            <End Role="reparacion_has_pieza" EntitySet="reparacion_has_pieza" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Rol_has_Permiso_Permiso1" Association="Self.fk_Rol_has_Permiso_Permiso1">
+            <End Role="permiso" EntitySet="permiso" />
+            <End Role="rol_has_permiso" EntitySet="rol_has_permiso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Rol_has_Permiso_Rol1" Association="Self.fk_Rol_has_Permiso_Rol1">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="rol_has_permiso" EntitySet="rol_has_permiso" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="mydbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dni" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="poblacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="factura" Relationship="Self.fk_factura_Cliente1" FromRole="cliente" ToRole="factura" />
+          <NavigationProperty Name="reparacion" Relationship="Self.fk_Reparacion_Cliente1" FromRole="cliente" ToRole="reparacion" />
+        </EntityType>
+        <EntityType Name="empleado">
+          <Key>
+            <PropertyRef Name="idEmpleado" />
+          </Key>
+          <Property Name="idEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuLogin" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrasenya" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rol_idRol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="rol" Relationship="Self.fk_Empleado_Rol1" FromRole="empleado" ToRole="rol" />
+          <NavigationProperty Name="reparacion" Relationship="Self.fk_Reparacion_Empleado1" FromRole="empleado" ToRole="reparacion" />
+        </EntityType>
+        <EntityType Name="factura">
+          <Key>
+            <PropertyRef Name="idFactura" />
+          </Key>
+          <Property Name="idFactura" Type="Int32" Nullable="false" />
+          <Property Name="fechaEmision" Type="DateTime" Nullable="false" />
+          <Property Name="concepto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cliente_idCliente" Type="Int32" Nullable="false" />
+          <Property Name="Reparacion_idReparacion" Type="Int32" Nullable="false" />
+          <Property Name="importeTotal" Type="Double" Nullable="false" />
+          <NavigationProperty Name="cliente" Relationship="Self.fk_factura_Cliente1" FromRole="factura" ToRole="cliente" />
+          <NavigationProperty Name="reparacion" Relationship="Self.fk_factura_Reparacion1" FromRole="factura" ToRole="reparacion" />
+        </EntityType>
+        <EntityType Name="permiso">
+          <Key>
+            <PropertyRef Name="idPermiso" />
+          </Key>
+          <Property Name="idPermiso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rol" Relationship="Self.rol_has_permiso" FromRole="permiso" ToRole="rol" />
+        </EntityType>
+        <EntityType Name="pieza">
+          <Key>
+            <PropertyRef Name="idPieza" />
+          </Key>
+          <Property Name="idPieza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="reparacion" Relationship="Self.reparacion_has_pieza" FromRole="pieza" ToRole="reparacion" />
+          <Property Name="precio" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reparacion">
+          <Key>
+            <PropertyRef Name="idReparacion" />
+          </Key>
+          <Property Name="idReparacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="precio" Type="Double" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="resolucion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaRecepcion" Type="DateTime" Nullable="false" />
+          <Property Name="fechaResolucion" Type="DateTime" />
+          <Property Name="observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Cliente_idCliente" Type="Int32" Nullable="false" />
+          <Property Name="Empleado_idEmpleado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cliente" Relationship="Self.fk_Reparacion_Cliente1" FromRole="reparacion" ToRole="cliente" />
+          <NavigationProperty Name="empleado" Relationship="Self.fk_Reparacion_Empleado1" FromRole="reparacion" ToRole="empleado" />
+          <NavigationProperty Name="factura" Relationship="Self.fk_factura_Reparacion1" FromRole="reparacion" ToRole="factura" />
+          <NavigationProperty Name="pieza" Relationship="Self.reparacion_has_pieza" FromRole="reparacion" ToRole="pieza" />
+          <Property Name="horasTrabajadas" Type="Double" />
+        </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreRol" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empleado" Relationship="Self.fk_Empleado_Rol1" FromRole="rol" ToRole="empleado" />
+          <NavigationProperty Name="permiso" Relationship="Self.rol_has_permiso" FromRole="rol" ToRole="permiso" />
+        </EntityType>
+        <Association Name="fk_factura_Cliente1">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="factura" Type="Self.factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="factura">
+              <PropertyRef Name="Cliente_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Reparacion_Cliente1">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="reparacion" Type="Self.reparacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="reparacion">
+              <PropertyRef Name="Cliente_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Empleado_Rol1">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="empleado">
+              <PropertyRef Name="Rol_idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Reparacion_Empleado1">
+          <End Role="empleado" Type="Self.empleado" Multiplicity="1" />
+          <End Role="reparacion" Type="Self.reparacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleado">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="reparacion">
+              <PropertyRef Name="Empleado_idEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_factura_Reparacion1">
+          <End Role="reparacion" Type="Self.reparacion" Multiplicity="1" />
+          <End Role="factura" Type="Self.factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reparacion">
+              <PropertyRef Name="idReparacion" />
+            </Principal>
+            <Dependent Role="factura">
+              <PropertyRef Name="Reparacion_idReparacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reparacion_has_pieza">
+          <End Role="pieza" Type="Self.pieza" Multiplicity="*" />
+          <End Role="reparacion" Type="Self.reparacion" Multiplicity="*" />
+        </Association>
+        <Association Name="rol_has_permiso">
+          <End Role="permiso" Type="Self.permiso" Multiplicity="*" />
+          <End Role="rol" Type="Self.rol" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="mydbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
+          <EntitySet Name="empleado" EntityType="Self.empleado" />
+          <EntitySet Name="factura" EntityType="Self.factura" />
+          <EntitySet Name="permiso" EntityType="Self.permiso" />
+          <EntitySet Name="pieza" EntityType="Self.pieza" />
+          <EntitySet Name="reparacion" EntityType="Self.reparacion" />
+          <EntitySet Name="rol" EntityType="Self.rol" />
+          <AssociationSet Name="fk_factura_Cliente1" Association="Self.fk_factura_Cliente1">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="factura" EntitySet="factura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Reparacion_Cliente1" Association="Self.fk_Reparacion_Cliente1">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="reparacion" EntitySet="reparacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Empleado_Rol1" Association="Self.fk_Empleado_Rol1">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="empleado" EntitySet="empleado" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Reparacion_Empleado1" Association="Self.fk_Reparacion_Empleado1">
+            <End Role="empleado" EntitySet="empleado" />
+            <End Role="reparacion" EntitySet="reparacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_factura_Reparacion1" Association="Self.fk_factura_Reparacion1">
+            <End Role="reparacion" EntitySet="reparacion" />
+            <End Role="factura" EntitySet="factura" />
+          </AssociationSet>
+          <AssociationSet Name="reparacion_has_pieza" Association="Self.reparacion_has_pieza">
+            <End Role="pieza" EntitySet="pieza" />
+            <End Role="reparacion" EntitySet="reparacion" />
+          </AssociationSet>
+          <AssociationSet Name="rol_has_permiso" Association="Self.rol_has_permiso">
+            <End Role="permiso" EntitySet="permiso" />
+            <End Role="rol" EntitySet="rol" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="mydbModelStoreContainer" CdmEntityContainer="mydbEntities">
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="mydbModel.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="dni" ColumnName="dni" />
+                <ScalarProperty Name="poblacion" ColumnName="poblacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empleado">
+            <EntityTypeMapping TypeName="mydbModel.empleado">
+              <MappingFragment StoreEntitySet="empleado">
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="usuLogin" ColumnName="usuLogin" />
+                <ScalarProperty Name="contrasenya" ColumnName="contrasenya" />
+                <ScalarProperty Name="Rol_idRol" ColumnName="Rol_idRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="factura">
+            <EntityTypeMapping TypeName="mydbModel.factura">
+              <MappingFragment StoreEntitySet="factura">
+                <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+                <ScalarProperty Name="fechaEmision" ColumnName="fechaEmision" />
+                <ScalarProperty Name="concepto" ColumnName="concepto" />
+                <ScalarProperty Name="Cliente_idCliente" ColumnName="Cliente_idCliente" />
+                <ScalarProperty Name="Reparacion_idReparacion" ColumnName="Reparacion_idReparacion" />
+                <ScalarProperty Name="importeTotal" ColumnName="importeTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="permiso">
+            <EntityTypeMapping TypeName="mydbModel.permiso">
+              <MappingFragment StoreEntitySet="permiso">
+                <ScalarProperty Name="idPermiso" ColumnName="idPermiso" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pieza">
+            <EntityTypeMapping TypeName="mydbModel.pieza">
+              <MappingFragment StoreEntitySet="pieza">
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="idPieza" ColumnName="idPieza" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reparacion">
+            <EntityTypeMapping TypeName="mydbModel.reparacion">
+              <MappingFragment StoreEntitySet="reparacion">
+                <ScalarProperty Name="horasTrabajadas" ColumnName="horasTrabajadas" />
+                <ScalarProperty Name="idReparacion" ColumnName="idReparacion" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="resolucion" ColumnName="resolucion" />
+                <ScalarProperty Name="fechaRecepcion" ColumnName="fechaRecepcion" />
+                <ScalarProperty Name="fechaResolucion" ColumnName="fechaResolucion" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="Cliente_idCliente" ColumnName="Cliente_idCliente" />
+                <ScalarProperty Name="Empleado_idEmpleado" ColumnName="Empleado_idEmpleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rol">
+            <EntityTypeMapping TypeName="mydbModel.rol">
+              <MappingFragment StoreEntitySet="rol">
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="reparacion_has_pieza" TypeName="mydbModel.reparacion_has_pieza" StoreEntitySet="reparacion_has_pieza">
+            <EndProperty Name="pieza">
+              <ScalarProperty Name="idPieza" ColumnName="Pieza_idPieza" />
+            </EndProperty>
+            <EndProperty Name="reparacion">
+              <ScalarProperty Name="idReparacion" ColumnName="Reparacion_idReparacion" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="rol_has_permiso" TypeName="mydbModel.rol_has_permiso" StoreEntitySet="rol_has_permiso">
+            <EndProperty Name="permiso">
+              <ScalarProperty Name="idPermiso" ColumnName="Permiso_idPermiso" />
+            </EndProperty>
+            <EndProperty Name="rol">
+              <ScalarProperty Name="idRol" ColumnName="Rol_idRol" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

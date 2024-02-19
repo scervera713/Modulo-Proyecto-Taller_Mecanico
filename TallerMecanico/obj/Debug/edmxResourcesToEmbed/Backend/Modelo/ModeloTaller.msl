@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="mydbModelStoreContainer" CdmEntityContainer="mydbEntities">
+    <EntitySetMapping Name="cliente">
+      <EntityTypeMapping TypeName="mydbModel.cliente">
+        <MappingFragment StoreEntitySet="cliente">
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="dni" ColumnName="dni" />
+          <ScalarProperty Name="poblacion" ColumnName="poblacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="empleado">
+      <EntityTypeMapping TypeName="mydbModel.empleado">
+        <MappingFragment StoreEntitySet="empleado">
+          <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="usuLogin" ColumnName="usuLogin" />
+          <ScalarProperty Name="contrasenya" ColumnName="contrasenya" />
+          <ScalarProperty Name="Rol_idRol" ColumnName="Rol_idRol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="factura">
+      <EntityTypeMapping TypeName="mydbModel.factura">
+        <MappingFragment StoreEntitySet="factura">
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="fechaEmision" ColumnName="fechaEmision" />
+          <ScalarProperty Name="concepto" ColumnName="concepto" />
+          <ScalarProperty Name="Cliente_idCliente" ColumnName="Cliente_idCliente" />
+          <ScalarProperty Name="Reparacion_idReparacion" ColumnName="Reparacion_idReparacion" />
+          <ScalarProperty Name="importeTotal" ColumnName="importeTotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="permiso">
+      <EntityTypeMapping TypeName="mydbModel.permiso">
+        <MappingFragment StoreEntitySet="permiso">
+          <ScalarProperty Name="idPermiso" ColumnName="idPermiso" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pieza">
+      <EntityTypeMapping TypeName="mydbModel.pieza">
+        <MappingFragment StoreEntitySet="pieza">
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="idPieza" ColumnName="idPieza" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reparacion">
+      <EntityTypeMapping TypeName="mydbModel.reparacion">
+        <MappingFragment StoreEntitySet="reparacion">
+          <ScalarProperty Name="horasTrabajadas" ColumnName="horasTrabajadas" />
+          <ScalarProperty Name="idReparacion" ColumnName="idReparacion" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="resolucion" ColumnName="resolucion" />
+          <ScalarProperty Name="fechaRecepcion" ColumnName="fechaRecepcion" />
+          <ScalarProperty Name="fechaResolucion" ColumnName="fechaResolucion" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="Cliente_idCliente" ColumnName="Cliente_idCliente" />
+          <ScalarProperty Name="Empleado_idEmpleado" ColumnName="Empleado_idEmpleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rol">
+      <EntityTypeMapping TypeName="mydbModel.rol">
+        <MappingFragment StoreEntitySet="rol">
+          <ScalarProperty Name="idRol" ColumnName="idRol" />
+          <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="reparacion_has_pieza" TypeName="mydbModel.reparacion_has_pieza" StoreEntitySet="reparacion_has_pieza">
+      <EndProperty Name="pieza">
+        <ScalarProperty Name="idPieza" ColumnName="Pieza_idPieza" />
+      </EndProperty>
+      <EndProperty Name="reparacion">
+        <ScalarProperty Name="idReparacion" ColumnName="Reparacion_idReparacion" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="rol_has_permiso" TypeName="mydbModel.rol_has_permiso" StoreEntitySet="rol_has_permiso">
+      <EndProperty Name="permiso">
+        <ScalarProperty Name="idPermiso" ColumnName="Permiso_idPermiso" />
+      </EndProperty>
+      <EndProperty Name="rol">
+        <ScalarProperty Name="idRol" ColumnName="Rol_idRol" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="TallerMecanico.Frontend.ControlUsuario.UCFactura"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:TallerMecanico.Frontend.ControlUsuario"
+             mc:Ignorable="d" Language="es-es"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="#333333">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBox Width="{Binding ActualWidth, ElementName=dgId}" Text="{Binding FiltroId,UpdateSourceTrigger=PropertyChanged}" 
+                         BorderBrush="Gray" BorderThickness="1" x:Name="FiltroId" TextChanged="FiltroId_TextChanged"/>
+                <DatePicker Width="{Binding ActualWidth, ElementName=dgFechaEmision}" Height="32"
+                         SelectedDate="{Binding FiltroFechaEmision,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                         BorderBrush="Gray" x:Name="FiltroFechaRecepcion"
+                         SelectedDateChanged="FiltroFechaEmision_SelectedDateChanged"/>
+                <TextBox Width="{Binding ActualWidth, ElementName=dgCliente}" Text="{Binding FiltroCliente,UpdateSourceTrigger=PropertyChanged}" 
+                         BorderBrush="Gray" BorderThickness="1" x:Name="FiltroCliente" TextChanged="FiltroCliente_TextChanged"/>
+                <TextBox Width="{Binding ActualWidth, ElementName=dgImporte}" Text="{Binding FiltroImporte,UpdateSourceTrigger=PropertyChanged}" 
+                         BorderBrush="Gray" BorderThickness="1" x:Name="FiltroImporte" TextChanged="FiltroImporte_TextChanged"/>
+                <TextBox Width="{Binding ActualWidth, ElementName=dgConcepto}" Text="{Binding FiltroConcepto,UpdateSourceTrigger=PropertyChanged}" 
+                         BorderBrush="Gray" BorderThickness="1" x:Name="FiltroConcepto" TextChanged="FiltroConcepto_TextChanged"/>
+            </StackPanel>
+            <Button Grid.Column="1" x:Name="BtnQuitarFiltros" Click="BtnQuitarFiltros_Click">
+                <mat:PackIcon Kind="FilterRemove"/>
+            </Button>
+        </Grid>
+
+        <DataGrid x:Name="dgListaFacturas" Grid.Row="1" ItemsSource="{Binding ListaFacturas}" CanUserAddRows="False" AutoGenerateColumns="False"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="0,2,0,0" SelectedItem="{Binding FacturaSeleccionada}">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+
+                    <MenuItem Header="Ver" Name="nItemEditar" Click="nItemEditar_Click">
+                        <MenuItem.Icon>
+                            <mat:PackIcon Kind="Edit"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Borrar" Name="nItemBorrar" Click="nItemBorrar_Click">
+                        <MenuItem.Icon>
+                            <mat:PackIcon Kind="Delete"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" x:Name="dgId" Binding="{Binding idFactura}" Width="auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Fecha Emisión" x:Name="dgFechaEmision" IsReadOnly="True"
+                                    Binding="{Binding fechaEmision, StringFormat=\{0:dd/MM/yyyy\}}" Width="auto"/>
+                <DataGridTemplateColumn Header="Cliente" x:Name="dgCliente" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding cliente.nombre}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding cliente.apellidos}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Importe" x:Name="dgImporte" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding importeTotal}"/>
+                                <TextBlock Text=" €"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Concepto" x:Name="dgConcepto" Binding="{Binding concepto}" Width="2*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

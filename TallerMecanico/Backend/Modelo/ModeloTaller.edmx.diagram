@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="964611a808f24bff80b5cf604177d93f" Name="Diagram1">
+        <EntityTypeShape EntityType="mydbModel.cliente" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="mydbModel.empleado" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mydbModel.factura" Width="1.5" PointX="3.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mydbModel.permiso" Width="1.5" PointX="1.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="mydbModel.pieza" Width="1.5" PointX="3.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="mydbModel.reparacion" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mydbModel.rol" Width="1.5" PointX="1.5" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="mydbModel.fk_factura_Cliente1" ManuallyRouted="false" />
+        <AssociationConnector Association="mydbModel.fk_Reparacion_Cliente1" ManuallyRouted="false" />
+        <AssociationConnector Association="mydbModel.fk_Empleado_Rol1" ManuallyRouted="false" />
+        <AssociationConnector Association="mydbModel.fk_Reparacion_Empleado1" ManuallyRouted="false" />
+        <AssociationConnector Association="mydbModel.fk_factura_Reparacion1" ManuallyRouted="false" />
+        <AssociationConnector Association="mydbModel.reparacion_has_pieza" ManuallyRouted="false" />
+        <AssociationConnector Association="mydbModel.rol_has_permiso" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

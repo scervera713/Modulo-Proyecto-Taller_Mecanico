@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="TallerMecanico.Frontend.ControlUsuario.UCCliente"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:TallerMecanico.Frontend.ControlUsuario"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="#333333">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBox Width="{Binding ActualWidth, ElementName=dgId}" Text="{Binding FiltroId,UpdateSourceTrigger=PropertyChanged}" 
+                         BorderBrush="Gray" BorderThickness="1" x:Name="FiltroId" TextChanged="FiltroId_TextChanged"/>
+                <TextBox Width="{Binding ActualWidth, ElementName=dgNombre}" Text="{Binding FiltroNombre,UpdateSourceTrigger=PropertyChanged}" 
+                         BorderBrush="Gray" BorderThickness="1" x:Name="FiltroNombre" TextChanged="FiltroNombre_TextChanged"/>
+                <TextBox Width="{Binding ActualWidth, ElementName=dgEmail}" Text="{Binding FiltroEmail,UpdateSourceTrigger=PropertyChanged}" 
+                         BorderBrush="Gray" BorderThickness="1" x:Name="FiltroEmail" TextChanged="FiltroEmail_TextChanged"/>
+                <TextBox Width="{Binding ActualWidth, ElementName=dgDNI}" Text="{Binding FiltroDNI,UpdateSourceTrigger=PropertyChanged}" 
+                         BorderBrush="Gray" BorderThickness="1" x:Name="FiltroDNI" TextChanged="FiltroDNI_TextChanged"/>
+                <TextBox Width="{Binding ActualWidth, ElementName=dgTelefono}" Text="{Binding FiltroTelefono,UpdateSourceTrigger=PropertyChanged}" 
+                         BorderBrush="Gray" BorderThickness="1" x:Name="FiltroTelefono" TextChanged="FiltroTelefono_TextChanged"/>
+            </StackPanel>
+            <Button Grid.Column="1" x:Name="BtnQuitarFiltros" Click="BtnQuitarFiltros_Click">
+                <mat:PackIcon Kind="FilterRemove"/>
+            </Button>
+        </Grid>
+
+        <DataGrid x:Name="dgListaClientes" Grid.Row="1" ItemsSource="{Binding ListaClientes}" CanUserAddRows="False" AutoGenerateColumns="False"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" SelectedItem="{Binding ClienteSeleccionado}">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+
+                    <MenuItem Header="Editar" Name="nItemEditar" Click="nItemEditar_Click">
+                        <MenuItem.Icon>
+                            <mat:PackIcon Kind="Edit"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Borrar" Name="nItemBorrar" Click="nItemBorrar_Click">
+                        <MenuItem.Icon>
+                            <mat:PackIcon Kind="Delete"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" x:Name="dgId" Binding="{Binding idCliente}" Width="auto" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="Cliente" x:Name="dgNombre" Width="2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding nombre}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding apellidos}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Email" x:Name="dgEmail" Binding="{Binding email}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="DNI" x:Name="dgDNI" Binding="{Binding dni}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Telefono" x:Name="dgTelefono" Binding="{Binding telefono}" Width="*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
